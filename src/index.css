@@ -1,13 +1,104 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  padding: 0;
+  }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+  body{ margin: 20px; }
+
+  .feedback__container{
+  display: flex;
+  text-align: center;
+  justify-content:center;
+  width: 70%;
+  height: 50px;
+  margin: auto;
+  padding:10px;
+  border-radius: 10px;
+  color:#fff;
+  font-size:18px;
+  }
+
+  .background--red { background-color:red; }
+
+  .background--green { background-color:#4bca8f; }
+
+  .form-container { margin: 25px auto;
+  width:30% }
+
+  .add-customer__form {
+    display: flex;
+    flex-direction:column;
+    padding:5px;
+    background-image:linear-gradient(to bottom, #31d2f2, #8de4f5);
+    border-radius:10px;
+  }
+
+  .add-customer__form label {
+    margin-right: auto;
+  }
+
+  .form__input {
+    margin: 1px;
+    border:none;
+    border-radius: 3px;
+    font-size:16px;
+    outline: none;
+  }
+
+  .form__button--submit {
+    margin: 5px 0 0 auto;
+    padding: 10px 15px;
+    width: 50%;
+    border: 1px solid #57ce92;
+    border-radius: 10px;
+    background: #4bca8f;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    outline-color: #2f9b69;
+  }
+
+  .form__button--submit:hover {
+    transform: scale(0.95);
+  }
+
+  .task__container {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius:5px;
+  }
+
+  .task__item{
+    width:98%;
+    background-color: #31d2f2;
+    margin: 10px;
+    padding: 5px;
+    border-radius:5px;
+  }
+
+  .task__item h4, p {
+    text-transform: capitalize;
+  }
+
+  .completed {
+    text-decoration: line-through;
+  }
+
+  .task__button--remove {
+  float: right;
+    padding: 5px;
+    border: 1px solid #f2685e;
+    border-radius: 5px;
+    background: #ce0b0b;
+    color: rgb(11, 1, 1);
+    text-decoration: none;
+    font-size: 13px;
+  }
+
+  .task__button--remove:hover {
+    transform: scale(0.95);
+  }
+
