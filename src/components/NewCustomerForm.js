@@ -10,6 +10,11 @@ const NewCustomerForm = (props) => {
     const [date, setDate] = useState(new Date());
 
 
+const handelDate = (date) => {
+
+    setDate(date)
+}
+
     const onSubmit = (e) => {
         e.preventDefault();
         if (!name) {
@@ -17,6 +22,11 @@ const NewCustomerForm = (props) => {
             return
         }
         props.onAdd({ name, email, treatment, date })
+
+        setName('');
+        setEmail('');
+        setTreatment('');
+
     }
 
 
@@ -45,6 +55,7 @@ const NewCustomerForm = (props) => {
 
                 <label>TreatMent</label>
                 <select className="form__input"   value={treatment} onChange={(e) => { setTreatment(e.target.value) }} >
+               <option></option>
                 <option>Nail Art</option>
                     <option>Keratin</option>
 
@@ -62,13 +73,13 @@ const NewCustomerForm = (props) => {
                     <label>Appointment Date</label>
                     <DatePicker
                         selected={date}
-                        onChange={date => setDate(date)}
+                        onChange={handelDate}
                         showTimeSelect
                         dateFormat="dd/MM/yyyy HH:mm"
                         timeFormat="HH:mm"
-                        timeIntervals={90}
                         minTime={new Date(new Date().setHours(7, 0))}
                         maxTime={new Date(new Date().setHours(21, 0))}
+
                     />
                 </div>
 

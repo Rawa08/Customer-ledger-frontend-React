@@ -1,43 +1,58 @@
-import React from 'react'
+import React, {useState} from 'react'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-const Customer = ({customer, onDelete}) => {
+const Customer = ({customer, onDelete, updateCustomerDate }) => {
+
     const {_id, name, email, treatment, date, added, completed} = customer;
-
-    // const formatedDate = (date) => {
-    //     const year = date.getFullYear();
-
-    //      const monthInt = date.getMonth()+1;
-    //     const month = monthInt  < 10 ? '0' + monthInt : monthInt;
-
-    //      const dayInt = date.getDate();
-    //     const day = dayInt < 10 ? '0' + dayInt : dayInt;
-
-    //      const hoursInt = date .getHours();
-    //      const hours = hoursInt < 10 ? '0' + hoursInt : hoursInt;
-
-    //      const minInt = date.getMinutes();
-    //      const min = minInt < 10 ? '0' + minInt : minInt;
-
-    //      const formatedDate = `${year}-${month}-${day}:${hours}-${min}`;
-
-    //     newD = formatedDate;
-    //     return newD
-    // }
+    const [updatedDate, setNewDate] = useState(new Date())
+    const [edit, setEditMode] = useState(false);
 
 
+    const formateDateTime = () => {
+        const datePart = date.slice(0,10);
+        const utcHouer = parseInt(date.slice(11,13))+2;
+        const min = date.slice(13,16);
+        const formatedDateTime = `${datePart} ${utcHouer.toString()}${min}`
+        return formatedDateTime;
+    }
 
+    const changeDate = () => setEditMode(true);
+
+    const updateDate = (date) => setNewDate(date);
+
+    const saveNewDate =  (id, newDate) => {
+        updateCustomerDate(newDate ,id)
+
+        setTimeout(() => setEditMode(false) ,1000)
+
+
+    }
 
     return (
-        <div key={_id}>
-            <p>Name: {name}</p>
-            <p>Name: {email}</p>
-            <p>Treatment: {treatment}</p>
-            <p>{`${date.slice(0,10)} -- ${date.slice(11,16)}`}</p>
-            <p>{completed ? 'Treated' : 'Booked'}</p>
-            <p>Added: {added}</p>
-            <p>{_id}</p>
+        <div key={_id} className="customer__card">
 
-            <button onClick={()=>onDelete(_id)}>Remove</button>
+            <p>Name: {name}</p>
+            <p>email: {email}</p>
+            <p>Treatment: {treatment}</p>
+            {edit ?
+<>
+            <DatePicker
+                        selected={updatedDate}
+                        onChange={updateDate}
+                        showTimeSelect
+                        dateFormat="dd/MM/yyyy HH:mm"
+                        timeFormat="HH:mm"
+                        minTime={new Date(new Date().setHours(7, 0))}
+                        maxTime={new Date(new Date().setHours(21, 0))}
+                        />
+                <button className="btn bg--blue" onClick={() => saveNewDate(_id, updatedDate)}>Save</button></>
+            :<p>{formateDateTime()}</p>}
+
+            <p className="customer-added__date">Created: {added.slice(0,10)}</p>
+            {edit ? '': <article className="btn-container"> <button className="btn bg--blue" onClick={changeDate}>Change Date</button>
+            <button className="btn bg--red" onClick={()=>onDelete(_id)}>Remove</button> </article>}
+
         </div>
     )
 }
