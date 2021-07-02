@@ -55,20 +55,38 @@ function App() {
       customer.date = newDate;
       return customer;
     }))
-
-
-
   }
+
+  // const completeCustomer = async (id) => {
+
+  //   const customer = customerState.find((customer) => (customer._id === id));
+
+  //   const updateData = {
+  //     method: 'PUT',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({ completed: !customer.completed })
+  //   };
+
+  //   await fetch(`http://customer-ledger.herokuapp.com/api/customers/${id}`, updateData);
+
+  //   sortState(customerState.map((customer) => {
+  //     if(customer._id === id)
+  //     customer.completed = !customer.completed;
+  //     return customer;
+  //   }))
+  // }
 
   const deleteCustomer = async (id) => {
     await fetch(`http://customer-ledger.herokuapp.com/api/customers/${id}`, { method: 'DELETE' });
     sortState(customerState.filter((customer) => customer._id !== id))
   }
 
+
+
   return (
     <div className="App">
       <Form onAdd={addCustomer} />
-      {customerState.length && <CustomerList customers={customerState} onDelete={deleteCustomer} updateCustomerDate={updateDate} />}
+      {customerState.length ? <CustomerList customers={customerState} onDelete={deleteCustomer} updateCustomerDate={updateDate} /> : <h1>Your customer ledger is empty!</h1> }
 
 
     </div>

@@ -17,10 +17,7 @@ const handelDate = (date) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if (!name) {
-            alert('Please provide text')
-            return
-        }
+
         props.onAdd({ name, email, treatment, date })
 
         setName('');
@@ -44,7 +41,7 @@ const handelDate = (date) => {
             <form className="add-customer__form" onSubmit={onSubmit}>
 
                 <label>Name:</label>
-                <input className="form__input" type='text' placeholder=' Required' value={name} onChange={(e) => { setName(e.target.value) }} />
+                <input className="form__input" type='text' placeholder=' -Required' value={name} onChange={(e) => { setName(e.target.value) }} required />
 
 
 
@@ -70,7 +67,7 @@ const handelDate = (date) => {
                 </select>
 
                 <div className='form-control'>
-                    <label>Appointment Date</label>
+                    <label>Appointment Date: </label>
                     <DatePicker
                         selected={date}
                         onChange={handelDate}
