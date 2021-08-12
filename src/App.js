@@ -25,13 +25,13 @@ function App() {
   }, [customerState])
 
   const fetchCustomers = async () => {
-    const result = await fetch('http://customer-ledger.herokuapp.com/api/customers/');
+    const result = await fetch('https://customer-ledger.herokuapp.com/api/customers/');
     const data = await result.json();
     return data;
   }
 
   const addCustomer = async (taskObj) => {
-    const res = await fetch('http://customer-ledger.herokuapp.com/api/customers/', {
+    const res = await fetch('https://customer-ledger.herokuapp.com/api/customers/', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(taskObj)
@@ -49,7 +49,7 @@ function App() {
       body: JSON.stringify({ date: newDate })
     };
 
-    await fetch(`http://customer-ledger.herokuapp.com/api/customers/${id}`, updateData)
+    await fetch(`https://customer-ledger.herokuapp.com/api/customers/${id}`, updateData)
     sortState(customerState.map((customer) => {
       if(customer._id === id)
       customer.date = newDate;
@@ -77,7 +77,7 @@ function App() {
   // }
 
   const deleteCustomer = async (id) => {
-    await fetch(`http://customer-ledger.herokuapp.com/api/customers/${id}`, { method: 'DELETE' });
+    await fetch(`https://customer-ledger.herokuapp.com/api/customers/${id}`, { method: 'DELETE' });
     sortState(customerState.filter((customer) => customer._id !== id))
   }
 
