@@ -16,15 +16,15 @@ function App() {
   }
 
   useEffect(() => {
-    console.log(apiKey)
+    
     const getCustomers = async () => {
       const data = await fetchCustomers()
       sortState(data)
     }
 
-    getCustomers();
-
-  }, [customerState])
+    return getCustomers();
+// eslint-disable-next-line 
+  }, [])
 
   const fetchCustomers = async () => {
     const result = await fetch('https://customer-ledger.herokuapp.com/api/customers/', {
@@ -88,7 +88,7 @@ function App() {
   const deleteCustomer = async (id) => {
     await fetch(`https://customer-ledger.herokuapp.com/api/customers/${id}`,
      { method: 'DELETE',
-       headers: { 'Authorization': process.env.REACT_APP_apiCredentials}
+       headers: { 'Authorization': apiKey}
      });
     sortState(customerState.filter((customer) => customer._id !== id))
   }
