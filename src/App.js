@@ -9,9 +9,10 @@ function App() {
   const [customerState, setCustomerState] = useState([]);
 
   const sortState = (currentState) => {
+    if(!currentState.error){
     const sorted = currentState.slice().sort((a, b) => b.date - a.date).reverse();
-    setCustomerState(sorted);
-
+    setCustomerState(sorted);}
+   
   }
 
   useEffect(() => {
@@ -25,7 +26,10 @@ function App() {
   }, [customerState])
 
   const fetchCustomers = async () => {
-    const result = await fetch('https://customer-ledger.herokuapp.com/api/customers/');
+    const result = await fetch('https://customer-ledger.herokuapp.com/api/customers/', {
+  
+      headers: { 'Authorization': process.env.apiCredentials}
+    });
     const data = await result.json();
     return data;
   }
@@ -33,7 +37,9 @@ function App() {
   const addCustomer = async (taskObj) => {
     const res = await fetch('https://customer-ledger.herokuapp.com/api/customers/', {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: { 
+        'content-type': 'application/json',
+        'Authorization': process.env.apiCredentials },
       body: JSON.stringify(taskObj)
     })
     const data = await res.json();
@@ -45,7 +51,9 @@ function App() {
 
     const updateData = {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': process.env.apiCredentials },
       body: JSON.stringify({ date: newDate })
     };
 
@@ -77,7 +85,10 @@ function App() {
   // }
 
   const deleteCustomer = async (id) => {
-    await fetch(`https://customer-ledger.herokuapp.com/api/customers/${id}`, { method: 'DELETE' });
+    await fetch(`https://customer-ledger.herokuapp.com/api/customers/${id}`,
+     { method: 'DELETE',
+       headers: { 'Authorization': process.env.apiCredentials}
+     });
     sortState(customerState.filter((customer) => customer._id !== id))
   }
 
@@ -86,7 +97,7 @@ function App() {
   return (
     <div className="App">
       <Form onAdd={addCustomer} />
-      {customerState.length ? <CustomerList customers={customerState} onDelete={deleteCustomer} updateCustomerDate={updateDate} /> : <h1>Your customer ledger is empty!</h1> }
+      {customerState.length ? <CustomerList customers={customerState} onDelete={deleteCustomer} updateCustomerDate={updateDate} /> : <h1>Appointments loading....</h1> }
 
 
     </div>
