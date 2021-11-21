@@ -28,7 +28,7 @@ function App() {
   const fetchCustomers = async () => {
     const result = await fetch('https://customer-ledger.herokuapp.com/api/customers/', {
   
-      headers: { 'Authorization': process.env.apiCredentials}
+      headers: { 'Authorization': process.env.REACT_APP_apiCredentials}
     });
     const data = await result.json();
     return data;
@@ -39,7 +39,7 @@ function App() {
       method: 'POST',
       headers: { 
         'content-type': 'application/json',
-        'Authorization': process.env.apiCredentials },
+        'Authorization': process.env.REACT_APP_apiCredentials },
       body: JSON.stringify(taskObj)
     })
     const data = await res.json();
@@ -53,7 +53,7 @@ function App() {
       method: 'PUT',
       headers: { 
         'Content-Type': 'application/json',
-        'Authorization': process.env.apiCredentials },
+        'Authorization': process.env.REACT_APP_apiCredentials },
       body: JSON.stringify({ date: newDate })
     };
 
@@ -87,7 +87,7 @@ function App() {
   const deleteCustomer = async (id) => {
     await fetch(`https://customer-ledger.herokuapp.com/api/customers/${id}`,
      { method: 'DELETE',
-       headers: { 'Authorization': process.env.apiCredentials}
+       headers: { 'Authorization': process.env.REACT_APP_apiCredentials}
      });
     sortState(customerState.filter((customer) => customer._id !== id))
   }
