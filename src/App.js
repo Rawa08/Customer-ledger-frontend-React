@@ -7,7 +7,7 @@ import CustomerList from './components/Customers';
 
 function App() {
   const [customerState, setCustomerState] = useState([]);
-
+  const apiKey = process.env.REACT_APP_apiCredentials;
   const sortState = (currentState) => {
     if(!currentState.error){
     const sorted = currentState.slice().sort((a, b) => b.date - a.date).reverse();
@@ -16,9 +16,10 @@ function App() {
   }
 
   useEffect(() => {
+    console.log(apiKey)
     const getCustomers = async () => {
       const data = await fetchCustomers()
-      await sortState(data)
+      sortState(data)
     }
 
     getCustomers();
@@ -28,7 +29,7 @@ function App() {
   const fetchCustomers = async () => {
     const result = await fetch('https://customer-ledger.herokuapp.com/api/customers/', {
   
-      headers: { 'Authorization': process.env.REACT_APP_apiCredentials}
+      headers: { 'Authorization':apiKey }
     });
     const data = await result.json();
     return data;
@@ -39,7 +40,7 @@ function App() {
       method: 'POST',
       headers: { 
         'content-type': 'application/json',
-        'Authorization': process.env.REACT_APP_apiCredentials },
+        'Authorization': apiKey },
       body: JSON.stringify(taskObj)
     })
     const data = await res.json();
@@ -53,7 +54,7 @@ function App() {
       method: 'PUT',
       headers: { 
         'Content-Type': 'application/json',
-        'Authorization': process.env.REACT_APP_apiCredentials },
+        'Authorization': apiKey },
       body: JSON.stringify({ date: newDate })
     };
 
