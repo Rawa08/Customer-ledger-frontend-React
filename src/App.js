@@ -7,6 +7,7 @@ import CustomerList from './components/Customers';
 
 function App() {
   const [customerState, setCustomerState] = useState([]);
+
   const apiKey = process.env.REACT_APP_apiCredentials;
   const sortState = (currentState) => {
     if(!currentState.error){
