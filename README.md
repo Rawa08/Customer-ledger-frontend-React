@@ -1,7 +1,7 @@
 # Customer Ledger    
 Customer ledger is an application to save and organize a list for customers in the beauty treatment bussines.
 
-<img  alt="Desktop vieo" width="350px" src="https://github.com/Rawa08/Customer-ledger-frontend-React/tree/main/readmeMedia/desktop.png" />&nbsp;&nbsp;<img  alt="Tablet View" width="80px" src="https://github.com/Rawa08/Customer-ledger-frontend-React/tree/main/readmeMedia/tablet.png" /> &nbsp;&nbsp;<img  alt="Mobile View" width="80px" src="https://github.com/Rawa08/Customer-ledger-frontend-React/tree/main/readmeMedia/mobile.png" /> 
+<img  alt="Desktop vieo" width="400px" src="https://github.com/Rawa08/Customer-ledger-frontend-React/raw/main/readmeMedia/desktop.png" />&nbsp;&nbsp;&nbsp;&nbsp;<img  alt="Tablet View" width="150px" src="https://github.com/Rawa08/Customer-ledger-frontend-React/raw/main/readmeMedia/tablet.png" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img  alt="Mobile View" width="100px" src="https://github.com/Rawa08/Customer-ledger-frontend-React/raw/main/readmeMedia/mobile.png" /> 
 
 <br />  
 
